@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <title>Dodaj użytkownika</title>
+</head>
+
+<body>
+
+<form th:action="@{/personal}" th:method="post" th:object="${personalData}">
+    Nazwa użytkownika: <br/>
+    <input type="date" th:field="*{birthDate}"/><br/>
+    <input type="hidden" th:field="*{id}"/>
+    <input type="hidden" th:field="*{user}"/>
+    <!--    Hasło: <br/>
+        <input type="text" th:field="*{password}"/><br/>-->
+
+    <input type="submit" value="Zapisz"/>
+
+    <br/><br/>
+
+
+</form>
+
+
+
+
+</body>
+</html>

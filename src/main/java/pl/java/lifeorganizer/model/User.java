@@ -1,9 +1,6 @@
 package pl.java.lifeorganizer.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {
@@ -16,6 +13,8 @@ public class User {
     private String firstName;
     private String lastName;
     private boolean enabled;
+    @OneToOne
+    private PersonalData personalData;
 
     public Long getId() {
         return id;
@@ -63,6 +62,14 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public PersonalData getPersonalData() {
+        return personalData;
+    }
+
+    public void setPersonalData(PersonalData personalData) {
+        this.personalData = personalData;
     }
 
     @Override
