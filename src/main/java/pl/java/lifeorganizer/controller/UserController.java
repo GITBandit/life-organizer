@@ -7,11 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pl.java.lifeorganizer.model.User;
-import pl.java.lifeorganizer.model.UserRepository;
-import pl.java.lifeorganizer.model.UserRole;
-import pl.java.lifeorganizer.model.UserRoleRepository;
+import pl.java.lifeorganizer.model.*;
 
 import java.security.Principal;
 
@@ -108,5 +106,41 @@ public class UserController {
         }
 
         return "<script>alert(\"Dane użytkownika zostały zaktualizowane\"); window.location = \"/\"</script>";
+    }
+
+    @GetMapping("/password")
+    public String changePassword(Model model){
+
+        Password password = new Password();
+
+        model.addAttribute("password", password);
+
+        return "password_change";
+    }
+
+    @PostMapping("/password")
+    @ResponseBody
+    public String confirmChangedPassword(Password password,
+                                         Principal principal){
+
+        if(password.getPassword1().equals(password.getPassword2()) && password != null && !password.getPassword1().equals("")){
+
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+            User user = userRepository.getUserByUsername(principal.getName());
+
+            String newPassword = passwordEncoder.encode(password.getPassword1());
+
+            user.setPassword(newPassword);
+
+            userRepository.save(user);
+
+            SecurityContextHolder.clearContext();
+
+            return "<script>alert(\"Hasło zmienione \\n \\n Zaloguj się za pomocą nowego hasła\"); window.location = \"/profile\"</script>";
+        }
+
+        return "<script>alert(\"Hasła nie są takie same / nie podano hasła \\n \\n Spróbój ponownie\"); window.location = \"/password\"</script>";
+
     }
 }
