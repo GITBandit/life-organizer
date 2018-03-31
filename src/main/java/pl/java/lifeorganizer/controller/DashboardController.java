@@ -24,20 +24,41 @@ public class DashboardController {
     @GetMapping("/dashboard")
     public String showDashboard(Model model, Principal principal){
 
-        User user = userRepository.getUserByUsername(principal.getName());
-        PersonalData personalData = personalDataRepository.getPersonalDataByUser(user);
+        PersonalData personalData = getPersonalDataForUserLoggedIn(principal);
 
         LocalDate birthDate = personalData.getBirthDate();
 
-        model.addAttribute("birthDate", birthDate);
+        model.addAttribute("birthDate", birthDate);  //to be removed
+
+
+        Long periodToNextBirthDay = calculatePeriodBetweenNextBirthDayAndNow(birthDate);
+
+
+        model.addAttribute("period", periodToNextBirthDay);
+
+
+        return "dashboard";
+    }
+
+
+    private PersonalData getPersonalDataForUserLoggedIn(Principal principal){
+
+        User user = userRepository.getUserByUsername(principal.getName());
+
+        PersonalData personalData = personalDataRepository.getPersonalDataByUser(user);
+
+        return personalData;
+    }
+
+
+    private Long calculatePeriodBetweenNextBirthDayAndNow(LocalDate birthDate){
 
         LocalDate present = LocalDate.now();
 
-
-
-        int thisYear = LocalDate.now().getYear();
+        int thisYear = present.getYear();
 
         LocalDate birthDayThisYear = birthDate.withYear(thisYear);
+
 
         int compared = birthDayThisYear.compareTo(present);
 
@@ -49,10 +70,7 @@ public class DashboardController {
 
         Long period = ChronoUnit.DAYS.between(present, birthDayThisYear);
 
-        model.addAttribute("period", period);
-
-
-        return "dashboard";
+        return period;
     }
 
 }
