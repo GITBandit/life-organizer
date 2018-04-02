@@ -11,7 +11,7 @@
 <body>
 
 <form th:action="@{/personal}" th:method="post" th:object="${personalData}">
-    Nazwa użytkownika: <br/>
+    Twoja data urodzenia: <br/>
     <input type="date" th:field="*{birthDate}"/><br/>
     <input type="hidden" th:field="*{id}"/>
     <input type="hidden" th:field="*{user}"/>
@@ -20,12 +20,12 @@
 
     <input type="submit" value="Zapisz"/>
 
-    <br/><br/>
-
 
 </form>
 
+<br/><br/><br/>
 
+<a href="/">Wróć na stronę główną</a>
 
 
 </body>

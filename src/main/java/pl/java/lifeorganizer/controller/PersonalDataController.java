@@ -69,6 +69,6 @@ public class PersonalDataController {
         }
 
 
-        return "changed";
+        return "<script>alert(\"Nowe dane zostały zapisane\"); window.location = \"/profile\"</script>";
     }
 }

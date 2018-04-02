@@ -26,16 +26,17 @@ public class DashboardController {
 
         PersonalData personalData = getPersonalDataForUserLoggedIn(principal);
 
-        LocalDate birthDate = personalData.getBirthDate();
+        try {
+            LocalDate birthDate = personalData.getBirthDate();
 
-        model.addAttribute("birthDate", birthDate);  //to be removed
+            model.addAttribute("birthDate", birthDate);  //to be removed
 
+            Long periodToNextBirthDay = calculatePeriodBetweenNextBirthDayAndNow(birthDate);
 
-        Long periodToNextBirthDay = calculatePeriodBetweenNextBirthDayAndNow(birthDate);
-
-
-        model.addAttribute("period", periodToNextBirthDay);
-
+            model.addAttribute("period", periodToNextBirthDay);
+        } catch (NullPointerException e){
+            return "no_events";
+        }
 
         return "dashboard";
     }

@@ -9,10 +9,16 @@
 </head>
 
 <body>
-<p th:text="${birthDate}"></p><br/>
+    <h3>Twoje wydarzenia</h3>
+<!--<p th:text="${birthDate}"></p><br/>-->
+    <br/><br/>
+    <p>Do Twoich następnych urodziń pozostało</p>
+    <p style="font-size: larger" th:text="${period}"></p>
+    <p>dni</p>
 
-<p>Pozostało</p>
-<p th:text="${period}"></p>
-<p>dni do kolejnych urodzin</p>
+
+    <br/><br/><br/>
+
+<a href="/">Wróć na stronę główną</a>
 </body>
 </html>
