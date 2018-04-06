@@ -137,7 +137,7 @@ public class UserController {
 
             SecurityContextHolder.clearContext();
 
-            return "<script>alert(\"Hasło zmienione \\n \\n Zaloguj się za pomocą nowego hasła\"); window.location = \"/profile\"</script>";
+                return "<script>alert(\"Hasło zmienione \\n \\n Zaloguj się za pomocą nowego hasła\"); window.location = \"/profile\"</script>";
         }
 
         return "<script>alert(\"Hasła nie są takie same / nie podano hasła \\n \\n Spróbój ponownie\"); window.location = \"/password\"</script>";
