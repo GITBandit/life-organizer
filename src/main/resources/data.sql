@@ -3,3 +3,6 @@ INSERT INTO user (id, username, password, first_name, last_name, enabled) VALUES
 INSERT INTO user_role (id, role, username) VALUES (1, 'ROLE_ADMIN', 'user1');
 INSERT INTO user_role (id, role, username) VALUES (2, 'ROLE_USER', 'user2');
 INSERT INTO personal_data (id, birth_date, user_id) VALUES (1, '2016-03-29', 2);
+INSERT INTO event (id, event_date, name, user_id) VALUES (1, '2018-06-20', 'Wydarzenie 1', 2);
+INSERT INTO event (id, event_date, name, user_id) VALUES (2, '2018-05-14', 'Wydarzenie 2', 2);
+

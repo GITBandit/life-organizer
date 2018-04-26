@@ -20,5 +20,15 @@
     <br/><br/><br/>
 
 <a href="/">Wróć na stronę główną</a>
+
+    <br/><br/><br/>
+
+    <ul th:each="event : ${eventList}">
+        <br/><br/>
+        <li th:text="${event.getEventDate()}"></li>
+        <li th:text="${event.getName()}"></li>
+        <li th:text="${periods.get(event.getId()-1)}"></li>
+    </ul>
+
 </body>
 </html>

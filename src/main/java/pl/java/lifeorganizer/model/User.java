@@ -1,6 +1,7 @@
 package pl.java.lifeorganizer.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -15,6 +16,8 @@ public class User {
     private boolean enabled;
     @OneToOne
     private PersonalData personalData;
+    @OneToMany
+    private List<Event> eventList;
 
     public Long getId() {
         return id;
@@ -70,6 +73,14 @@ public class User {
 
     public void setPersonalData(PersonalData personalData) {
         this.personalData = personalData;
+    }
+
+    public List<Event> getEventList() {
+        return eventList;
+    }
+
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
     }
 
     @Override
